@@ -5,11 +5,15 @@ waiting.current = [];
 
 export function useTaskManager() {
 
-    return [pushTask, status, setFinishedAction]
+    return [pushTask, status, onFinished, onStart]
 }
 
-function setFinishedAction(){
+function onFinished(){
     // Task 진행중 , 처리 ....
+}
+
+function onStart(){
+
 }
 
 //setFinishedAction
