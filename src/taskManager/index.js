@@ -5,10 +5,15 @@ waiting.current = [];
 
 export function useTaskManager() {
 
-    return [pushTask, status]
+    return [pushTask, status, setFinishedAction]
 }
 
+function setFinishedAction(){
+    
+}
 
+//setFinishedAction
+// only for once , options , keeps on option , 
 
 function pushTask(task, ...params) {
     // for those 0.000001% error cases
