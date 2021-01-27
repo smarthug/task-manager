@@ -9,7 +9,7 @@ export function useTaskManager() {
 }
 
 function setFinishedAction(){
-    
+    // Task 진행중 , 처리 ....
 }
 
 //setFinishedAction
@@ -23,6 +23,7 @@ function pushTask(task, ...params) {
 
 
     if (waiting.current.length === 1 && prevLength ===0) {
+        //task on ... 
         next();
     }
 }
