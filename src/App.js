@@ -12,22 +12,16 @@ function TestTask(time, name) {
   })
 }
 
-async function awaitTestTask(time, name) {
-  
-   let tmp;
-
-  setTimeout(() => {
-    console.log(name);
-    tmp = name;
-    // resolve('testTask done?');
-  }, time)
-  // await;
-  return tmp;
-
+function Test (a, ...other) {
+  console.log(other)
+  console.log(...other)
 }
 
 function App() {
 
+  // useEffect(()=>{
+  //   Test(3, 4, {"a":999})
+  // },[])
 
   return (
     <div className="App">
@@ -45,9 +39,13 @@ function TestCompA() {
 
 
   useEffect(() => {
-    pushTask(() => TestTask('5000', '5000'));
-    pushTask(() => TestTask('1000', '1000'));
-    pushTask(() => TestTask('2000', '2000'));
+    // pushTask(() => TestTask('5000', '5000'));
+    // pushTask(() => TestTask('1000', '1000'));
+    // pushTask(() => TestTask('2000', '2000'));
+    pushTask(TestTask,'5000', '5000');
+    pushTask(Test, [3,4,5],{"a":999})
+    pushTask(TestTask,'1000', '1000');
+    pushTask(TestTask,'2000', '2000');
     status();
 
 
