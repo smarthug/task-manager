@@ -3,31 +3,43 @@ import React, { useState, useEffect } from 'react';
 const waiting = React.createRef();
 waiting.current = [];
 
-export function useTaskManager() {
+const onStart = React.createRef();
+onStart.current = () => { };
 
-    return [pushTask, status, onFinished, onStart]
+const onFinished = React.createRef();
+onFinished.current = () => { };
+
+export function useTaskManager({ onTaskStart, onAllTasksFinished } = {}) {
+
+    useEffect(() => {
+        if (onTaskStart) {
+
+            onStart.current = onTaskStart;
+        }
+
+        if (onAllTasksFinished) {
+
+            onFinished.current = onAllTasksFinished;
+        }
+    }, [])
+
+    return [pushTask, status]
 }
 
-function onFinished(){
-    // Task 진행중 , 처리 ....
-}
-
-function onStart(){
-
-}
+// function 
 
 //setFinishedAction
 // only for once , options , keeps on option , 
 
 function pushTask(task, ...params) {
-    // for those 0.000001% error cases
+    // for those 0.000001% error cases 1 -> 0 , 1g
     const prevLength = waiting.current.length;
     waiting.current.push({ task: task, params: params });
     // console.log('prev', prevLength);
 
 
-    if (waiting.current.length === 1 && prevLength ===0) {
-        //task on ... 
+    if (waiting.current.length === 1 && prevLength === 0) {
+        onStart.current();
         next();
     }
 }
@@ -40,6 +52,7 @@ function next() {
     if (task) {
         run(task)
     } else {
+        onFinished.current();
         console.log("all ended")
     }
 }
@@ -53,12 +66,12 @@ function run({ task, params }) {
         })
         .then(next);
 
-//     return task(...params)
-//         .then((resp) => {
-//             console.log(resp)
-//             waiting.current.shift();
-//         })
-//         .then(next);
+    //     return task(...params)
+    //         .then((resp) => {
+    //             console.log(resp)
+    //             waiting.current.shift();
+    //         })
+    //         .then(next);
 }
 
 function status() {

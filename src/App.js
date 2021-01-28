@@ -35,7 +35,7 @@ export default App;
 
 
 function TestCompA() {
-  const [pushTask, status] = useTaskManager();
+  const [pushTask, status] = useTaskManager({onTaskStart:()=>{console.log("started!!!")}, onAllTasksFinished:()=>{console.log("all finished")}});
 
 
   useEffect(() => {
@@ -64,17 +64,17 @@ function TestCompA() {
 
 
 function TestCompB() {
-  const [pushTask, status] = useTaskManager();
+  const [pushTask, status] = useTaskManager({onAllTasksFinished:()=>{console.log("fnished  testest")}});
 
 
 
   useEffect(() => {
     // pushTask(5);
-    status();
+    // status();
   }, [])
 
   function handleClick() {
-    pushTask(() => TestTask('2000', '2000'))
+    // pushTask(() => TestTask('2000', '2000'))
     // pushTask(() => awaitTestTask('2000', '2000'))
   }
 
