@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 
 const waiting = React.createRef();
 waiting.current = [];
@@ -26,16 +26,13 @@ export function useTaskManager({ onTaskStart, onAllTasksFinished } = {}) {
     return [pushTask, status]
 }
 
-// function 
 
-//setFinishedAction
-// only for once , options , keeps on option , 
 
 function pushTask(task, ...params) {
     // for those 0.000001% error cases 1 -> 0 , 1g
     const prevLength = waiting.current.length;
     waiting.current.push({ task: task, params: params });
-    // console.log('prev', prevLength);
+
 
 
     if (waiting.current.length === 1 && prevLength === 0) {
